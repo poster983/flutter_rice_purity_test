@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_rice_purity_test/GetController.dart';
 import 'package:flutter_rice_purity_test/types/Question.dart';
 import 'package:flutter_rice_purity_test/widgets/QuestionCard.dart';
 import 'package:flutter_rice_purity_test/widgets/RoundIconButton.dart';
+import 'package:get/get.dart';
 import 'package:tcard/tcard.dart';
 
 class QuestionStack extends StatefulWidget {
@@ -16,9 +18,12 @@ class QuestionStack extends StatefulWidget {
 }
 
 class _QuestionStackState extends State<QuestionStack> {
+  final GetController controller = Get.find();
+
   //Widget _cardStack;
   _QuestionStackState() {
     super.initState();
+    controller.currentQuizIndex.value = 0;
     //_cardStack = _buildCards();
   }
 
@@ -26,57 +31,73 @@ class _QuestionStackState extends State<QuestionStack> {
     return BottomAppBar(
         color: Colors.transparent,
         elevation: 0.0,
-        child: new Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: new Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  new RoundIconButton.small(
-                    icon: Icons.arrow_left,
-                    iconColor: Colors.purple,
-                    onPressed: () {
-                      previousCard();
-                    },
-                  ),
-                  new SizedBox(
-                    width: 10,
-                  ),
-                  new RoundIconButton.large(
-                    icon: Icons.clear,
-                    iconColor: Colors.red,
-                    onPressed: () {
-                      currentNo();
-                    },
-                  ),
-                  new SizedBox(
-                    width: 10,
-                  ),
-                  new RoundIconButton.large(
-                    icon: Icons.favorite,
-                    iconColor: Colors.green,
-                    onPressed: () {
-                      currentYes();
-                    },
-                  ),
-                  new SizedBox(
-                    width: 10,
-                  ),
-                  new RoundIconButton.small(
-                    icon: Icons.arrow_right,
-                    iconColor: Colors.blue,
-                    onPressed: () {
-                      nextCard();
-                    },
-                  ),
-                ])));
+        child: Stack(children: [
+          Positioned.fill(
+            child: Align(
+                alignment: Alignment.bottomCenter,
+                child: GetX<GetController>(builder: (_) {
+                  return LinearProgressIndicator(
+                    value: _.currentQuizIndex.value / widget.questions.length,
+                    semanticsLabel: 'Progress',
+                  );
+                })),
+          ),
+          new Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: new Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    new RoundIconButton.small(
+                      icon: Icons.arrow_left,
+                      iconColor: Colors.purple,
+                      onPressed: () {
+                        previousCard();
+                      },
+                    ),
+                    new SizedBox(
+                      width: 10,
+                    ),
+                    new RoundIconButton.large(
+                      icon: Icons.clear,
+                      iconColor: Colors.red,
+                      onPressed: () {
+                        currentNo();
+                      },
+                    ),
+                    new SizedBox(
+                      width: 10,
+                    ),
+                    new RoundIconButton.large(
+                      icon: Icons.favorite,
+                      iconColor: Colors.green,
+                      onPressed: () {
+                        currentYes();
+                      },
+                    ),
+                    new SizedBox(
+                      width: 10,
+                    ),
+                    new RoundIconButton.small(
+                      icon: Icons.arrow_right,
+                      iconColor: Colors.blue,
+                      onPressed: () {
+                        nextCard();
+                      },
+                    ),
+                  ]))
+        ]));
   }
 
   TCardController cardControlller;
-  int currentIndex=0;
+
   Widget _buildCards(context) {
-    
-    List<Widget> cards = List.generate(widget.questions.length,
-        (index) => QuestionCard(widget.questions[index], questionNumber: index+1,));
+    List<Widget> cards = List.generate(
+        widget.questions.length,
+        (index) => QuestionCard(
+              widget.questions[index],
+              background: widget.questions[index].cardBackground,
+              questionNumber: index + 1,
+            ));
 
     return TCard(
       delaySlideFor: 100,
@@ -90,17 +111,10 @@ class _QuestionStackState extends State<QuestionStack> {
         }
       },
       onBack: (index, info) {
-        setState(() {
-          currentIndex = index;
-        });
+        controller.currentQuizIndex.value = index;
       },
       onForward: (int index, SwipInfo swipe) {
-        setState(() {
-          if(index != widget.questions.length) {
-            currentIndex = index; 
-          }
-          
-        });
+        controller.currentQuizIndex.value = index;
         switch (swipe.direction) {
           case SwipDirection.Left:
             print("NO");
@@ -151,7 +165,7 @@ class _QuestionStackState extends State<QuestionStack> {
   Widget build(BuildContext context) {
     return Scaffold(
         body: Center(
-            child: _buildCards(context),
+          child: _buildCards(context),
         ),
         bottomNavigationBar: _buildBottomActions());
   }

@@ -17,7 +17,7 @@ class _ResultsViewState extends State<ResultsView> {
   int calculateScore() {
     int score = 0;
     widget.results.forEach((element) {
-      if (element.decision == QuestionDecision.no) {
+      if (element.decision == QuestionDecision.no || element.decision == QuestionDecision.undecided) {
         score++;
       }
     });

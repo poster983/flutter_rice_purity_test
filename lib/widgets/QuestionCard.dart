@@ -73,13 +73,13 @@ class _QuestionCardState extends State<QuestionCard> {
 
   @override
   Widget build(BuildContext context) {
-    return Stack(children: [
-      new Container(
+    return new Container(
         decoration: new BoxDecoration(
           borderRadius: BorderRadius.circular(8.0),
         ),
-        child: (widget.background != null) ? widget.background : defaultBG,
-      ),
+        child: Stack(children: [
+       (widget.background != null) ? widget.background : defaultBG,
+      
       /*Image(
         image: NetworkImage(
             'https://flutter.github.io/assets-for-api-docs/assets/widgets/owl.jpg'),
@@ -106,7 +106,7 @@ class _QuestionCardState extends State<QuestionCard> {
       bottom: MediaQuery.of(context).size.height * 0.05
     )
     
-    ]);
+    ]));
   }
 }
 

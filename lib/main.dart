@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_rice_purity_test/GetController.dart';
 import 'package:flutter_rice_purity_test/types/Question.dart';
 import 'package:flutter_rice_purity_test/widgets/QuestionCard.dart';
 import 'package:flutter_rice_purity_test/views/RicePurityTestStack.dart';
@@ -59,6 +60,7 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  final GetController controller = Get.put(GetController());
   @override
   Widget build(BuildContext context) {
     // This method is rerun every time setState is called, for instance as done

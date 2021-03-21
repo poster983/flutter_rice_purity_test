@@ -9,7 +9,10 @@ class RicePurityTestStack extends StatefulWidget {
 
   final List<Question> questions = [
     new Question(question: "Held hands romantically?", severity: QuestionSeverity.tame),
-    new Question(question: "Been on a date?", severity: QuestionSeverity.tame),
+    new Question(question: "Been on a date?", severity: QuestionSeverity.tame, cardBackground: Image(
+        image: NetworkImage(
+            'https://flutter.github.io/assets-for-api-docs/assets/widgets/owl.jpg'),
+      )),
     new Question(question: "Been in a relationship?", severity: QuestionSeverity.tame),
     new Question(question: "Danced without leaving room for Jesus?", severity: QuestionSeverity.tame),
     new Question(question: "Kissed a non-family member?", severity: QuestionSeverity.tame),
