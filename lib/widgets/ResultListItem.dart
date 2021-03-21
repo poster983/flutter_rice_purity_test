@@ -10,8 +10,7 @@ class ResultListItem extends StatefulWidget {
   State<StatefulWidget> createState() => _ResultListItemState();
 }
 
-class _ResultListItemState extends State<ResultListItem>
-    with SingleTickerProviderStateMixin {
+class _ResultListItemState extends State<ResultListItem> {
   
 
 

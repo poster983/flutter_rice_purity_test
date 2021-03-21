@@ -28,9 +28,7 @@ class _ResultsViewState extends State<ResultsView> {
   @override
   void initState() {
     super.initState();
-    questionList = List.generate(widget.results.length, (index) {
-      
-    });
+    //questionList = List.generate(widget.results.length, (index) {});
   }
 
   @override

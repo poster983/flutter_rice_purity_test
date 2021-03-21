@@ -1,9 +1,11 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_rice_purity_test/GetController.dart';
 import 'package:flutter_rice_purity_test/types/Question.dart';
 import 'package:flutter_rice_purity_test/widgets/QuestionCard.dart';
 import 'package:flutter_rice_purity_test/widgets/RoundIconButton.dart';
+import 'package:flutter_rice_purity_test/widgets/SwipeDirectionIndicator.dart';
 import 'package:get/get.dart';
 import 'package:tcard/tcard.dart';
 
@@ -25,6 +27,8 @@ class _QuestionStackState extends State<QuestionStack> {
   _QuestionStackState() {
     super.initState();
     controller.currentQuizIndex.value = 0;
+    controller.horizontalSwipeStartValue.value = null;
+    controller.horizontalSwipeValue.value = null;
     //_cardStack = _buildCards();
   }
 
@@ -69,7 +73,7 @@ class _QuestionStackState extends State<QuestionStack> {
                       width: 10,
                     ),
                     new RoundIconButton.large(
-                      icon: Icons.favorite,
+                      icon: Icons.check,
                       iconColor: Colors.green,
                       onPressed: () {
                         currentYes();
@@ -100,8 +104,9 @@ class _QuestionStackState extends State<QuestionStack> {
               questionNumber: index + 1,
             ));
 
-    return TCard(
-      delaySlideFor: 100,
+    Widget tcard = TCard(
+      delaySlideFor: 150,
+      slideSpeed: 20,
       size: Size(MediaQuery.of(context).size.width,
           MediaQuery.of(context).size.height * 0.8),
       cards: cards,
@@ -120,10 +125,12 @@ class _QuestionStackState extends State<QuestionStack> {
           case SwipDirection.Left:
             print("NO");
             widget.questions[index - 1].no();
+
             break;
           case SwipDirection.Right:
             print("YES");
             widget.questions[index - 1].yes();
+
             break;
           case SwipDirection.None:
             print("SKIP");
@@ -131,6 +138,42 @@ class _QuestionStackState extends State<QuestionStack> {
         }
       },
     );
+
+    /*return GestureDetector(
+      behavior: HitTestBehavior.translucent,
+        child: tcard,
+        onHorizontalDragUpdate: (details) {
+          print(details);
+        });*/
+
+    return RawGestureDetector(
+        gestures: {
+          AllowMultipleGestureRecognizer: GestureRecognizerFactoryWithHandlers<
+              AllowMultipleGestureRecognizer>(
+            () => AllowMultipleGestureRecognizer(),
+            (AllowMultipleGestureRecognizer instance) {
+              instance.onUpdate = (details) {
+                //print(details.localPosition.distance);
+                controller.horizontalSwipeValue.value =
+                    details.localPosition.dx;
+                print(controller.horizontalSwipeValue.value - controller.horizontalSwipeStartValue.value);
+              };
+              instance.onStart = (details) {
+                //print(details);
+                controller.horizontalSwipeStartValue.value =
+                    details.localPosition.dx;
+              };
+
+              instance.onEnd = (details) {
+                controller.horizontalSwipeStartValue.value = null;
+                controller.horizontalSwipeValue.value = null;
+              };
+            },
+          )
+        },
+        behavior: HitTestBehavior.opaque,
+        //Parent Container
+        child: tcard);
   }
 
   void currentYes() {
@@ -170,8 +213,31 @@ class _QuestionStackState extends State<QuestionStack> {
   Widget build(BuildContext context) {
     return Scaffold(
         body: Center(
-          child: _buildCards(context),
-        ),
+            child: Stack(children: [
+          Positioned(bottom: Get.height * 0.05, child: _buildCards(context)),
+          Transform.translate(
+            offset: Offset(0.0, MediaQuery.of(context).padding.top),
+            child: SwipeDirectionIndicator(),
+          )
+          //SwipeDirectionIndicator(),
+          
+          /*
+          Align(
+            alignment: Alignment.topCenter,
+            child: Positioned(
+              child: SwipeDirectionIndicator(),
+              top: -100
+            )
+          )*/
+          
+        ])),
         bottomNavigationBar: _buildBottomActions());
+  }
+}
+
+class AllowMultipleGestureRecognizer extends PanGestureRecognizer {
+  @override
+  void rejectGesture(int pointer) {
+    acceptGesture(pointer);
   }
 }

@@ -3,6 +3,7 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_rice_purity_test/types/Question.dart';
 import 'package:flutter_screenutil/screen_util.dart';
+import 'package:get/get.dart';
 import 'package:simple_animations/simple_animations.dart';
 
 class QuestionCard extends StatefulWidget {
@@ -58,16 +59,21 @@ class _QuestionCardState extends State<QuestionCard> {
         child: new BackdropFilter(
           filter: ImageFilter.blur(sigmaX: 20, sigmaY: 20),
           child: new Container(
+              constraints: BoxConstraints(maxWidth: Get.width,),
               padding: EdgeInsets.all(padding),
               decoration: new BoxDecoration(
                 borderRadius: BorderRadius.circular(8.0),
                 color: Colors.grey.shade200.withOpacity(0.3),
               ),
               child: new Text(
+                
                 text,
+                softWrap: true,
+                textAlign: TextAlign.center,
                 style: new TextStyle(
-                    fontSize: ScreenUtil()
-                        .setSp(size, allowFontScalingSelf: true),
+                    
+                    fontSize: size,  /*ScreenUtil()
+                        .setSp(size, allowFontScalingSelf: true),*/
                     fontFamily: 'Roboto'),
               ))));
   }
@@ -86,11 +92,19 @@ class _QuestionCardState extends State<QuestionCard> {
       Center(
           child: Container(
               padding: EdgeInsets.all(25.0),
-              child:
-                  new FittedBox(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+
+                children: [
+                new FittedBox(
                     fit: BoxFit.contain,
                     alignment: Alignment.center,
-                    child: _buildTextBlock(widget.question.question, 24, 25.0)),
+                    child: _buildTextBlock(widget.question.question, 24.0, 25.0)),
+                (widget.question.secondLine!=null)?SizedBox(height: 10):Container(),
+                (widget.question.secondLine!=null)?_buildTextBlock(widget.question.secondLine, 10.0, 13.0):Container(),
+              ],)
+                  
                   
                 
           
@@ -100,7 +114,7 @@ class _QuestionCardState extends State<QuestionCard> {
       Positioned.fill(
       child: Align(
         alignment: Alignment.bottomCenter,
-        child: _buildTextBlock(widget.questionNumber.toString(), 15, 15.0),
+        child: _buildTextBlock(widget.questionNumber.toString(), 15.0, 15.0),
       ),
       bottom: MediaQuery.of(context).size.height * 0.05
     )
