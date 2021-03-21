@@ -53,8 +53,9 @@ class _QuestionCardState extends State<QuestionCard> {
   );
 
   Widget _buildTextBlock(String text, num size, double padding) {
-      return ClipRect(
-      child: new BackdropFilter(
+      return ClipRRect(
+        borderRadius: BorderRadius.circular(8.0),
+        child: new BackdropFilter(
           filter: ImageFilter.blur(sigmaX: 20, sigmaY: 20),
           child: new Container(
               padding: EdgeInsets.all(padding),
@@ -73,10 +74,8 @@ class _QuestionCardState extends State<QuestionCard> {
 
   @override
   Widget build(BuildContext context) {
-    return new Container(
-        decoration: new BoxDecoration(
-          borderRadius: BorderRadius.circular(8.0),
-        ),
+    return new ClipRRect(
+        borderRadius: BorderRadius.circular(25.0),
         child: Stack(children: [
        (widget.background != null) ? widget.background : defaultBG,
       

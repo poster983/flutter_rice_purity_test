@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_rice_purity_test/GetController.dart';
 import 'package:flutter_rice_purity_test/types/Question.dart';
 import 'package:flutter_rice_purity_test/widgets/QuestionCard.dart';
@@ -136,12 +137,14 @@ class _QuestionStackState extends State<QuestionStack> {
     print("Yes");
     //widget.questions[currentQuestion].yes();
     cardControlller.forward(direction: SwipDirection.Right);
+    HapticFeedback.heavyImpact();
     //controller.triggerRight();
   }
 
   void currentNo() {
     print("No");
     cardControlller.forward(direction: SwipDirection.Left);
+    HapticFeedback.heavyImpact();
     //controller.triggerLeft();
   }
 
@@ -149,6 +152,7 @@ class _QuestionStackState extends State<QuestionStack> {
     if (cardControlller.index == 0) {
       return;
     }
+    HapticFeedback.lightImpact();
     cardControlller.back();
     //controller.triggerDown();
   }
@@ -157,6 +161,7 @@ class _QuestionStackState extends State<QuestionStack> {
     if (cardControlller.index == widget.questions.length - 1) {
       return;
     }
+    HapticFeedback.lightImpact();
     cardControlller.forward(direction: SwipDirection.None);
     //controller.triggerUp();
   }
