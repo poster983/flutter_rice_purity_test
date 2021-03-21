@@ -19,7 +19,7 @@ jobs:
       - run: flutter build web --release
       - run: |
           cd build/web
-          # echo "puritytest.josephhassell.dev" > CNAME
+          echo "puritytest.josephhassell.dev" > CNAME
           git init
           # type configurations: your user.email and user.name followed lines 
           # git config --global user.email your_email 
