@@ -38,9 +38,18 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
   change_app_package_name: ^0.1.2 # flutter pub run change_app_package_name:main com.josephhassell.puritytest
+  flutter_launcher_icons: "^0.8.0" 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
 
+#flutter pub run flutter_launcher_icons:main
+flutter_icons:
+  android: true
+  ios: true
+  image_path: "assets/app_icon/leg_android.png"
+  image_path_ios: "assets/app_icon/ios_icon.png"
+  adaptive_icon_background: "assets/app_icon/adaptive_icon_background.png"
+  adaptive_icon_foreground: "assets/app_icon/adaptive_icon_foreground.png"
 # The following section is specific to Flutter.
 flutter:
 
