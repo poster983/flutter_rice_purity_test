@@ -1,14 +1,14 @@
 import 'package:flutter/widgets.dart';
 
-enum QuestionSeverity { tame, immoral, raunchy, scandlus, unspeakable }
+enum QuestionSeverity { tame, immoral, raunchy, scandalous, unspeakable }
 
 enum QuestionDecision { undecided, yes, no }
 
 class Question {
-  final String question;
-  final String secondLine;
-  final QuestionSeverity severity;
-  final Widget cardBackground;
+  String question;
+  String secondLine;
+  QuestionSeverity severity;
+  Widget cardBackground;
 
   QuestionDecision decision = QuestionDecision.undecided;
 

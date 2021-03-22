@@ -10,7 +10,7 @@ class SwipeDirectionIndicator extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print(window.physicalSize);
+    //print(window.physicalSize);
     return GetX<GetController>(builder: (_) {
       if (_.horizontalSwipeStartValue.value == null ||
           _.horizontalSwipeValue.value == null) {
@@ -31,7 +31,7 @@ class SwipeDirectionIndicator extends StatelessWidget {
       if (blurAmount > 20) {
         blurAmount = 20;
       }
-      print(blurAmount);
+      //print(blurAmount);
       Color color =
           (_.horizontalSwipeValue.value > _.horizontalSwipeStartValue.value)
               ? Colors.green
@@ -57,7 +57,7 @@ class SwipeDirectionIndicator extends StatelessWidget {
                               decoration: BoxDecoration(
                                 border: Border.all(width: 5.0, color: color),
                                 borderRadius: BorderRadius.circular(25.0),
-                                color: Colors.grey.shade200.withOpacity(0.5),
+                                color: Colors.grey.shade200.withOpacity(0.4),
                               ),
                               child: Text(
                                 (_.horizontalSwipeValue.value >

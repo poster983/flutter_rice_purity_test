@@ -105,7 +105,7 @@ class _QuestionStackState extends State<QuestionStack> {
             ));
 
     Widget tcard = TCard(
-      delaySlideFor: 150,
+      delaySlideFor: 100,
       slideSpeed: 20,
       size: Size(MediaQuery.of(context).size.width,
           MediaQuery.of(context).size.height * 0.8),
@@ -156,7 +156,7 @@ class _QuestionStackState extends State<QuestionStack> {
                 //print(details.localPosition.distance);
                 controller.horizontalSwipeValue.value =
                     details.localPosition.dx;
-                print(controller.horizontalSwipeValue.value - controller.horizontalSwipeStartValue.value);
+                //print(controller.horizontalSwipeValue.value - controller.horizontalSwipeStartValue.value);
               };
               instance.onStart = (details) {
                 //print(details);

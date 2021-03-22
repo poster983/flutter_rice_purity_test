@@ -97,10 +97,8 @@ class _QuestionCardState extends State<QuestionCard> {
                 crossAxisAlignment: CrossAxisAlignment.center,
 
                 children: [
-                new FittedBox(
-                    fit: BoxFit.contain,
-                    alignment: Alignment.center,
-                    child: _buildTextBlock(widget.question.question, 24.0, 25.0)),
+                (widget.question.question!=null)?new FittedBox(fit: BoxFit.contain, alignment: Alignment.center, child: _buildTextBlock(widget.question.question, 24.0, 25.0)):Container(),
+                /*(widget.question.question!=null)?_buildTextBlock(widget.question.question, 24.0, 25.0):Container(),*/
                 (widget.question.secondLine!=null)?SizedBox(height: 10):Container(),
                 (widget.question.secondLine!=null)?_buildTextBlock(widget.question.secondLine, 10.0, 13.0):Container(),
               ],)
