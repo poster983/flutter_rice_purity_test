@@ -91,7 +91,8 @@ class RicePurityTestStack extends StatefulWidget {
 
       new Question(question: "Had sexual intercourse?", severity: QuestionSeverity.scandalous), 
       new Question(question: "Had sexual intercourse three or more times in one night?", severity: QuestionSeverity.scandalous), 
-new Question(cardBackground: Container(color: Colors.white, constraints: BoxConstraints.expand(), child: Align(alignment: Alignment.topCenter, child: Image.network("https://i.kym-cdn.com/photos/images/masonry/001/904/985/621.png"))), severity: QuestionSeverity.scandalous), //69      new Question(question: "Had sexual intercourse 10 or more times?", severity: QuestionSeverity.scandalous), 
+      new Question(cardBackground: Container(color: Colors.white, constraints: BoxConstraints.expand(), child: Align(alignment: Alignment.topCenter, child: Image.network("https://i.kym-cdn.com/photos/images/masonry/001/904/985/621.png"))), severity: QuestionSeverity.scandalous), //69      
+      new Question(question: "Had sexual intercourse 10 or more times?", severity: QuestionSeverity.scandalous), 
       new Question(question: "Had sexual intercourse in four or more positions?", severity: QuestionSeverity.scandalous), 
       new Question(question: "Had sexual intercourse with a stranger or person you met within 24 hours?", severity: QuestionSeverity.scandalous), 
       new Question(question: "Had sexual intercourse in a motor vehicle?", severity: QuestionSeverity.scandalous), 

@@ -61,7 +61,15 @@ class _ResultsViewState extends State<ResultsView> {
                   SizedBox(
                     height: 25,
                   ),
-                  PurityScore(calculateScore(), widget.results.length)
+                  PurityScore(calculateScore(), widget.results.length),
+
+                  new Text(
+                    "The lower the score, the less \"pure\"",
+                    style: new TextStyle(
+                        fontSize:
+                            ScreenUtil().setSp(10, allowFontScalingSelf: true),
+                        fontFamily: 'Roboto'),
+                  ),
                 ],
               ),
             )));

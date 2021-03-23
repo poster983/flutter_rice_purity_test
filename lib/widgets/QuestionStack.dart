@@ -214,11 +214,13 @@ class _QuestionStackState extends State<QuestionStack> {
     return Scaffold(
         body: Center(
             child: Stack(children: [
-          Positioned(bottom: Get.height * 0.05, child: _buildCards(context)),
-          Transform.translate(
-            offset: Offset(0.0, MediaQuery.of(context).padding.top),
-            child: SwipeDirectionIndicator(),
-          )
+              
+              Positioned(top: MediaQuery.of(context).padding.top, child: _buildCards(context)),
+              
+              Transform.translate(
+                offset: Offset(0.0, MediaQuery.of(context).padding.top),
+                child: SwipeDirectionIndicator(),
+              )
           //SwipeDirectionIndicator(),
           
           /*

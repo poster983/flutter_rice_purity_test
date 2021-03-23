@@ -1,11 +1,11 @@
 {
-    "name": "flutter_rice_purity_test",
-    "short_name": "flutter_rice_purity_test",
+    "name": "Purity Test",
+    "short_name": "Purity Test",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",
     "theme_color": "#0175C2",
-    "description": "A new Flutter project.",
+    "description": "A modern day recreation of the Original Rice Purity Test and an updated version",
     "orientation": "portrait-primary",
     "prefer_related_applications": false,
     "icons": [
